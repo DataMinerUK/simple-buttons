@@ -7,7 +7,7 @@ The "minimum" in "minimum viable product". This is just three buttons that chang
 Install meteor [here](https://www.meteor.com/install)
 
 ```bash
-git clone https://github.com/DataMinerUK/simple-buttons
+git clone https://github.com/DataMinerUK/simple-buttons.git
 cd simple-buttons
 meteor npm install
 ```

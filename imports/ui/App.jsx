@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
 
-import Click from './Button.jsx'
+import Photon from './Button.jsx'
 
 export default class App extends Component {
-  getButtons() {
-    return [
-      { id: 1, color: 'red'},
-      { id: 2, color: 'green'},
-      { id: 3, color: 'blue'},
-    ];
-  }
   renderButtons() {
-    return this.getButtons().map((click) => (
-      <Click key={click.id} click={click} />
+    return this.props.wims.map((wim) => (
+      <Photon key={wim.id} wim={wim} />
     ));
   }
   render() {
@@ -23,3 +17,13 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  wims: PropTypes.array.isRequired,
+};
+
+export default createContainer(() => {
+  return {
+    wims: Wims.find().fetch(),
+  };
+}, App);

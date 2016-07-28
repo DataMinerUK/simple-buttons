@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import Particle from 'particle-api-js';
 import { Meteor } from 'meteor/meteor';
 
-export default class Click extends Component {
+export default class Photon extends Component {
 
   lightParticle(){
-    Meteor.call("lightParticle", "************", function(error, result) {
+    Meteor.call("lightParticle", "*********", function(error, result) {
       console.log(result);
     });
   }
@@ -14,14 +14,14 @@ export default class Click extends Component {
   render() {
     return (
       <li>
-        <button className={this.props.click.color}  onClick={this.lightParticle} >
-        {this.props.click.color.toUpperCase()}
+        <button className={this.props.wim.product_id}  onClick={this.lightParticle} >
+        {this.props.wim.name.toUpperCase()}
         </button>
       </li>
     );
   }
 }
 
-Click.propTypes = {
-  click: PropTypes.object.isRequired,
+Photon.propTypes = {
+  wim: PropTypes.object.isRequired,
 };

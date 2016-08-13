@@ -14,7 +14,7 @@ meteor npm install
 
 To run in the browser on localhost:3000:
 ```bash
-meteor
+PARTICLE_USERNAME=<username_for_particle_account> PARTICLE_PASSWORD=<password_for_particle_account> meteor
 ```
 
 To run in ios emulator (requires Xcode):

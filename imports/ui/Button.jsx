@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 export default class Photon extends Component {
 
   lightParticle(){
-    Meteor.call("lightParticle", "*********", function(error, result) {
+    Meteor.call("lightParticle", "3e002b001247353236343033", function(error, result) {
       console.log(result);
     });
   }

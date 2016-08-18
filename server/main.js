@@ -6,12 +6,6 @@ var token;
 var particle = new Particle();
 const Wims = new Mongo.Collection('wims');
 
-var myAccessToken;
-var foo = function(my_token){
-  myAccessToken = my_token;
-  console.log('external consolog call on global myAccessToken:', myAccessToken);
-}
-
 Meteor.startup(() => {
     particle.login({username: process.env.PARTICLE_USERNAME, password: process.env.PARTICLE_PASSWORD}).then(
       Meteor.bindEnvironment(function(data){
@@ -37,12 +31,36 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
-  lightParticle: function(deviceId) {
-    particle.callFunction({ deviceId: deviceId, name: 'digitalwrite', argument: 'D7:HIGH', auth: token }).then(
+  flashRainbows: function(deviceId){
+    particle.signalDevice({ deviceId: deviceId, signal: true, auth: token }).then(
       function(data) {
-        console.log('Function called succesfully:', data);
+        console.log('Device is shouting rainbows:', data);
+        setTimeout(
+          particle.signalDevice({ deviceId: deviceId, signal: false, auth: token }).then(
+            function(data) {
+              console.log('Device is shouting rainbows:', data);
+            }, function(err) {
+              console.log('Error sending a signal to the device:', err);
+          })
+        ,5000);
       }, function(err) {
-        console.log('An error occurred:', err);
+        console.log('Error sending a signal to the device:', err);
+      });
+  },
+  startRainbows: function(deviceId){
+    particle.signalDevice({ deviceId: deviceId, signal: true, auth: token }).then(
+      function(data) {
+        console.log('Device is shouting rainbows:', data);
+      }, function(err) {
+        console.log('Error sending a signal to the device:', err);
+      });
+  },
+  stopRainbows: function(deviceId){
+    particle.signalDevice({ deviceId: deviceId, signal: false, auth: token }).then(
+      function(data) {
+        console.log('Device is shouting rainbows:', data);
+      }, function(err) {
+        console.log('Error sending a signal to the device:', err);
       });
   }
 });

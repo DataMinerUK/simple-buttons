@@ -5,16 +5,25 @@ import { Meteor } from 'meteor/meteor';
 
 export default class Photon extends Component {
 
-  lightParticle(){
-    Meteor.call("lightParticle", "3e002b001247353236343033", function(error, result) {
-      console.log(result);
+  flashParticle(){
+    console.log(this.props.wim.id);
+    Meteor.call("flashRainbows", this.props.wim.id, function(error, result) {
+      console.log("flashing rainbows");
     });
+    Meteor.call("startRainbows", this.props.wim.id, function(error, result) {
+      console.log("starting rainbows");
+    });
+    setTimeout(
+      Meteor.call("stopRainbows", this.props.wim.id, function(error, result) {
+        console.log("stop rainbows");
+      })
+    ,5000);
   }
 
   render() {
     return (
       <li>
-        <button className={this.props.wim.product_id}  onClick={this.lightParticle} >
+        <button className={this.props.wim.product_id}  onClick={this.flashParticle.bind(this)} >
         {this.props.wim.name.toUpperCase()}
         </button>
       </li>

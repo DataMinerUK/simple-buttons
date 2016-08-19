@@ -7,13 +7,10 @@ export default class Photon extends Component {
 
   flashParticle(){
     console.log(this.props.wim.id);
-    Meteor.call("flashRainbows", this.props.wim.id, function(error, result) {
-      console.log("flashing rainbows");
-    });
     Meteor.call("startRainbows", this.props.wim.id, function(error, result) {
       console.log("starting rainbows");
     });
-    setTimeout(
+    setTimeout(() =>
       Meteor.call("stopRainbows", this.props.wim.id, function(error, result) {
         console.log("stop rainbows");
       })

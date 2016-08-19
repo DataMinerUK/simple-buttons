@@ -31,22 +31,6 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
-  flashRainbows: function(deviceId){
-    particle.signalDevice({ deviceId: deviceId, signal: true, auth: token }).then(
-      function(data) {
-        console.log('Device is shouting rainbows:', data);
-        setTimeout(
-          particle.signalDevice({ deviceId: deviceId, signal: false, auth: token }).then(
-            function(data) {
-              console.log('Device is shouting rainbows:', data);
-            }, function(err) {
-              console.log('Error sending a signal to the device:', err);
-          })
-        ,5000);
-      }, function(err) {
-        console.log('Error sending a signal to the device:', err);
-      });
-  },
   startRainbows: function(deviceId){
     particle.signalDevice({ deviceId: deviceId, signal: true, auth: token }).then(
       function(data) {
